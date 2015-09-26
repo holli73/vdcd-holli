@@ -1,3 +1,10 @@
+will add following missing featuers
+
+1) deconz - group support
+    -> make groups available as devices and szene calls
+2) generate interface to mysql DB where sensor values are stored from automation tool (automic.com)
+    -> sensor values stored from different systems like (1-wire temp/ic2 rasp (lux/rain)/sun shining/wind/...)
+
 
 vdcd
 ====
