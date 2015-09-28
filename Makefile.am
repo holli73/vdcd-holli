@@ -76,9 +76,15 @@ LEDCHAIN_INCLUDES = \
   -I ${srcdir}/src/thirdparty/rpi_ws281x
 
 else
+# holli - build options were missing for build on linux x64 (ubuntu buntu 14.04.3 LTS)
+# holli - missing options -lavahi-common -lavahi-core added because build failed! 
+# holli - missing path's added for build 
+# src/deviceclasses/external/externaldevicecontainer.cpp \
+# src/deviceclasses/external/externaldevicecontainer.hpp \
+#
 # automatic libs does not work right now due to commented out checks in autoconf.ac, so specify -l directly
 # vdcd_LDADD = $(JSONC_LIBS) $(PTHREAD_LIBS) $(SQLITE3_LIBS) $(PROTOBUFC_LIBS)
-vdcd_LDADD = $(PTHREAD_LIBS) -lprotobuf-c -lsqlite3 -ljson -ldl -lcrypto -lz
+vdcd_LDADD = $(PTHREAD_LIBS) -lprotobuf-c -lsqlite3 -lavahi-common -lavahi-core -ljson -ldl -lcrypto -lz
 # build mongoose into vdcd, no library
 MONGOOSE_SRC = src/thirdparty/mongoose/mongoose.c src/thirdparty/mongoose/mongoose.h
 endif
@@ -93,11 +99,10 @@ vdcd_CXXFLAGS = \
   -I ${srcdir}/src/vdc_common \
   -I ${srcdir}/src/behaviours \
   -I ${srcdir}/src/deviceclasses/simpleio \
-  -I ${srcdir}/src/deviceclasses/external \
   -I ${srcdir}/src/deviceclasses/enocean \
   -I ${srcdir}/src/deviceclasses/dali \
   -I ${srcdir}/src/deviceclasses/hue \
-  -I ${srcdir}/../libavahi-core \
+  -I /usr/include/avahi-core \
   ${LEDCHAIN_INCLUDES} \
   ${BOOST_CPPFLAGS} \
   ${JSONC_CFLAGS} \
@@ -240,8 +245,6 @@ vdcd_SOURCES = \
   src/deviceclasses/simpleio/analogiodevice.hpp \
   src/deviceclasses/simpleio/staticdevicecontainer.cpp \
   src/deviceclasses/simpleio/staticdevicecontainer.hpp \
-  src/deviceclasses/external/externaldevicecontainer.cpp \
-  src/deviceclasses/external/externaldevicecontainer.hpp \
   src/deviceclasses/enocean/enoceancomm.cpp \
   src/deviceclasses/enocean/enoceancomm.hpp \
   src/deviceclasses/enocean/enoceandevice.cpp \
@@ -269,6 +272,8 @@ vdcd_SOURCES = \
   src/deviceclasses/hue/huedevicecontainer.hpp \
   src/deviceclasses/hue/huedevice.cpp \
   src/deviceclasses/hue/huedevice.hpp \
+  src/deviceclasses/external/externaldevicecontainer.cpp \
+  src/deviceclasses/external/externaldevicecontainer.hpp \
   src/p44_vdcd_main.cpp
 
 
@@ -291,12 +296,11 @@ olavdcd_CXXFLAGS = \
   -I ${srcdir}/src/vdc_common \
   -I ${srcdir}/src/behaviours \
   -I ${srcdir}/src/deviceclasses/simpleio \
-  -I ${srcdir}/src/deviceclasses/external \
   -I ${srcdir}/src/deviceclasses/enocean \
   -I ${srcdir}/src/deviceclasses/dali \
   -I ${srcdir}/src/deviceclasses/hue \
   -I ${srcdir}/src/deviceclasses/ola \
-  -I ${srcdir}/../libavahi-core \
+  -I /usr/include/avahi-core \
   ${LEDCHAIN_INCLUDES} \
   ${BOOST_CPPFLAGS} \
   ${JSONC_CFLAGS} \

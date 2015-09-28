@@ -47,7 +47,7 @@
 #include "staticdevicecontainer.hpp"
 #endif
 #if !DISABLE_EXTERNAL
-#include "externaldevicecontainer.hpp"
+#include "deviceclasses/external/externaldevicecontainer.hpp"
 #endif
 
 #if !DISABLE_DISCOVERY
