@@ -37,6 +37,9 @@
 #if !DISABLE_HUE
 #include "huedevicecontainer.hpp"
 #endif
+#if !DISABLE_DECONZ_GRP
+#include "deconzdevicecontainer.hpp"
+#endif
 #if !DISABLE_OLA
 #include "oladevicecontainer.hpp"
 #endif
@@ -305,6 +308,10 @@ public:
       #if !DISABLE_HUE
       { 0,   "huelights",     false, "enable support for hue LED lamps (via hue bridge)" },
       { 0,   "hueapiurl",     true,  "hue API url;use hue bridge API at specific location (disables UPnP/SSDP search)" },
+      #endif
+      #if !DISABLE_DECONZ_GRP
+      { 0,   "deconzgrp",     false, "enable support for group objects from deconz" },
+      { 0,   "deconzurl",     true,  "deconz API url;use deconz API at specific location (disables UPnP/SSDP search) ip:port" },
       #endif
       #if !DISABLE_OLA
       { 0,   "ola",           false, "enable support for OLA (Open Lighting Architecture) server" },
